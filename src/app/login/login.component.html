@@ -1,0 +1,36 @@
+<div class="modal-dialog modal-login">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="avatar">
+        <img src="https://www.tutorialrepublic.com/examples/images/avatar.png" alt="Avatar">
+      </div>				
+      <h4 class="modal-title">User Login</h4>	
+    </div>
+    <div class="modal-body">
+        <div *ngIf="errormsg">
+            <div class="alert alert-danger" role="alert">
+                  {{errormsg}}
+                  </div>
+          </div>
+      <form #loginform="ngForm" *ngIf ="!submitted" novalidate>
+        <!-- <div class="form-group">	
+          <input type="text" #firstname="ngModel" placeholder="User name" [(ngModel)]="user.firstname" 
+          [class.is-invalid]="firstname.invalid && firstname.touched" ngModel class="form-control"  name="firstname" autocomplete="off" required >
+        </div> -->
+        <div class="form-group">
+          <input type="text" class="form-control" minlength="10" maxlength="10" #mobile="ngModel" name="mobile" [(ngModel)]="user.mobile"
+          [class.is-invalid]="mobile.invalid && mobile.touched" ngModel 
+           placeholder="Mobile number" required oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off">	
+        </div>        
+        <div class="form-group">
+          <button type="submit" [disabled]="loginform.form.invalid"  class="btn btn-primary btn-lg btn-block login-btn" (click)="login()">Login</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a style="text-decoration: none;">New User? <b style="cursor: pointer;" routerLink="/register">Register</b></a>
+    </div>
+  </div>
+</div>
+
+

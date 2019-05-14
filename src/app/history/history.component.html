@@ -1,0 +1,15 @@
+<div class="container">
+  <h3 style="text-align: center">Transactions History</h3>
+  <div class="row">
+    <p class="btn btn-outline-dark" routerLink="/dashboard"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go to dashboard</p>
+    <br>
+    <div class="card" *ngFor="let val of mypayments">
+        <div class="row " style="background-color: #3e222205;">
+              <div class="card-block px-3">
+                <h4 class="card-title">{{val.amount}}</h4>
+                <!-- <p class="card-text">Duis aute irure dolor in</p> -->
+              </div>
+          </div>
+        </div>
+  </div>
+</div>
