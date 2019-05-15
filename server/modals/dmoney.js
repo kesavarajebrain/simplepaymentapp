@@ -7,6 +7,9 @@ const dmoneySchema = new Schema({
     sendername : String,
     senderId : String,
     amount: String,
+    status:String,
+    receivername:String,
+    date : String
 });
 
 module.exports = mongoose.model('dmoney', dmoneySchema, 'dmoney');

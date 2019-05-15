@@ -10,6 +10,7 @@ import {RegisterService} from './register.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpModule, Response } from '@angular/http';
 import { HistoryComponent } from './history/history.component';
+import { DummyComponent } from './dummy/dummy.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HistoryComponent } from './history/history.component';
     RegisterComponent,
     LoginComponent,
     DashboardComponent,
-    HistoryComponent
+    HistoryComponent,
+    DummyComponent
   ],
   imports: [
     BrowserModule,

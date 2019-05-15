@@ -18,10 +18,12 @@ export class DashboardComponent implements OnInit {
   sendername:any;
   senderId:any;
   status:any;
+  totalAmount :any = 0;
   public money: any = {};
   allsentAmounts = [];
   mypayments = [];
   wholeAmount = [];
+  sendAmtLength :any;
 
   constructor(private router: Router , private _register : RegisterService ) {
     this.money.sendto = '';
@@ -31,6 +33,7 @@ export class DashboardComponent implements OnInit {
     this.loggedUser = JSON.parse(localStorage.getItem('currentUser')).firstname;
     this.loggedUserId = JSON.parse(localStorage.getItem('currentUser'))._id;
     console.log(this.loggedUserId)
+    this.allUsers();
     this.getSentMoney();
   }
 
@@ -61,8 +64,14 @@ export class DashboardComponent implements OnInit {
   }
 
   sendAmount(){
-    this.money.sendername = this.loggedUser; 
-    this.money.senderId = this.loggedUserId; 
+    for (let i = 0; i < this.totalUsers.length; i++) {
+          if (this.money.sendto == this.totalUsers[i]._id) {
+            this.money.receivername = this.totalUsers[i].firstname;
+          }
+        }
+    this.money.sendername = this.loggedUser;
+    this.money.senderId = this.loggedUserId;
+    this.money.date = new Date();
     this.money.status = "Amount Debited"
     console.log(this.money);
     this._register.sendmoney(this.money).subscribe(
@@ -71,6 +80,9 @@ export class DashboardComponent implements OnInit {
         this.successMsg = 'Amount sent successfully!';
         setTimeout(() => {
           this.successMsg = '';
+          document.getElementById("closemodal").click();
+          this.router.navigateByUrl('/dummy', { skipLocationChange: true });
+          setTimeout(() => this.router.navigate(['/history']),100);
         }, 3000);
       },
       err => {
@@ -88,12 +100,15 @@ export class DashboardComponent implements OnInit {
         for(let i = 0; i < this.allsentAmounts.length; i++){
           if( this.loggedUserId == this.allsentAmounts[i].senderId){
             this.mypayments[j] = this.allsentAmounts[i];
-            this.wholeAmount.push = this.mypayments[j].amount;  
-            j++; 
-            console.log(this.wholeAmount)
-            console.log(this.mypayments);
+            j++;
+            console.log(this.mypayments.length);
           }
+          this.sendAmtLength = this.mypayments.length;
         }
+        for(let i = 0; i < this.mypayments.length; i++) {
+          this.totalAmount = this.totalAmount + parseInt(this.mypayments[i].amount);
+        }
+          console.log(this.totalAmount);
       },
       err => {
         console.log(err);

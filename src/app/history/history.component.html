@@ -1,13 +1,35 @@
 <div class="container">
-  <h3 style="text-align: center">Transactions History</h3>
+  <h3 style="text-align: center">{{loggedUser}}- Transactions History</h3>
   <div class="row">
     <p class="btn btn-outline-dark" routerLink="/dashboard"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go to dashboard</p>
-    <br>
-    <div class="card" *ngFor="let val of mypayments">
+<br>
+    <p style="float:left;padding:1%;cursor:pointer;border-radius: 20px;font-weight: 600;" id="paraTag1" (click)="changeColor1()" (click)="getSentMoney()">Debits</p>&nbsp;&nbsp;
+    <p style="float:left;padding:1%;cursor:pointer;border-radius: 20px;font-weight: 600;" id="paraTag" (click)="changeColor()" (click)="receivedMoney()">Crdits</p>
+<br><br>
+    <div  *ngIf="errorMsg" style="text-align:center;" >{{errorMsg}}</div>
+      <div  *ngIf="errorMsg1 && !errorMsg" style="text-align:center;" >{{errorMsg1}}</div>
+    <div class="card" >
         <div class="row " style="background-color: #3e222205;">
-              <div class="card-block px-3">
-                <h4 class="card-title">{{val.amount}}</h4>
-                <!-- <p class="card-text">Duis aute irure dolor in</p> -->
+              <div class="card-block" >
+                <div class="col-md-12">
+                  <div class="row" *ngFor="let val of mypayments">
+                    <div class="col-md-4">
+                      <p>Amount : <b>Rs.{{val.amount}}</b></p>
+                      </div>
+                    <!-- <div class="col-md-3">
+                      <p>{{val.status}}</p>
+                    </div> -->
+                    <div class="col-md-4">
+                      <p >Creditor : <b>{{val.receivername}}</b></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p >Debitor : <b>{{val.sendername}}</b></p>
+                    </div>
+                    <div class="col-md-4">
+                      <p>Date : <b>{{val.date | date}}</b></p>
+                    </div>
+                  </div>
+                </div>
               </div>
           </div>
         </div>
